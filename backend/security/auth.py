@@ -1,5 +1,6 @@
 from flask import request, abort, current_app 
-from flaskApi import app, db
+from flaskApi import app
+from flaskApi.mongodb import db
 from functools import wraps
 from helpers.httpResp import success, error
 import jwt
@@ -21,7 +22,7 @@ def token_required(f):
             resp = validate_token(token)
             #Token validated
             if resp["code"] == 200:
-                currUser = db.users.find_one({"_id": resp["message"]})
+                currUser = db.getUser({"_id": resp["message"]})
                 if currUser is not None:
                     #User access granted
                     return f(currUser,  *args, **kwargs)
