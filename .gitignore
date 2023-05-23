@@ -1,0 +1,6 @@
+backend/__pycache__
+backend/security/secrets.py
+**/__pycache__/
+extra.py
+venv
+planning.txt
